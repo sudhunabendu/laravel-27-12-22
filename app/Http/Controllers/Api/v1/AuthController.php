@@ -15,56 +15,6 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
 
-    // public function index(Request $request){
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required|max:255',
-    //         'email' => 'required|unique:user|max:255',
-    //         'password' => 'required|max:6',
-
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json('error','Somethig went error')
-    //                     ->withErrors($validator)
-    //                     ->withInput();
-    //     }
-
-    //     $user = new User();
-    //     $user->name = $request->name;
-    //     $user->email = $request->email;
-    //     $user->password =Hash::make($request->password);
-    //     if($user->save()){
-    //         return response()->json('Registration success');
-    //     }else{
-    //         return response()->json('Registration is not completed');
-    //     }
-
-    // }
-
-    // public index1(Request $request){
-    // return response()->json('ss');
-
-    // $validator = Validator::make($request->all(), [
-    //     'name' => 'required|max:255',
-    //     'email' => 'required|unique:users|max:255',
-    //     'password' => 'required|max:6',
-
-    // ]);
-
-    // if ($validator->fails()) {
-    //     return response()->json(['error'=>'Somethig went error']);
-    //         // ->withErrors($validator)
-    //         // ->withInput();
-    // }
-    // $user = new User();
-    // $user->name = $request->name;
-    // $user->email = $request->email;
-    // $user->password = Hash::make($request->password);
-    // $user->save();
-    // return response()->json('Registration success');
-    // }
-
-
     public function index(Request $request)
     {
 
@@ -160,8 +110,8 @@ class AuthController extends Controller
                     // $data = Auth::user();
 
                     if (auth()->attempt($data)) {
-                        $token = auth()->user()->createToken('Laravel-9-Passport-Auth')->accessToken;
-                        return response()->json(['token' => $token,'user'=>$data], 200);
+                        $token = auth()->user()->createToken('MyApp')->accessToken;
+                        return response()->json(['token' => $token,'user'=>$data,'success'=>'User login successfully.'], 200);
                     } else {
                         return response()->json(['error' => 'Unauthorised'], 401);
                     }
@@ -195,24 +145,6 @@ class AuthController extends Controller
             }
         }
 
-        // public function login(Request $request)
-        // {
-        //     if (!Auth::attempt($request->only('email', 'password')))
-        //     {
-        //         return response()
-        //             ->json(['message' => 'Unauthorized'], 401);
-        //     }
-
-        //     $user = User::where('email', $request['email'])->firstOrFail();
-
-        //     $token = $user->createToken('auth_token')->plainTextToken;
-
-        //     return response()
-        //         ->json(['message' => 'Hi '.$user->name.', welcome to home','access_token' => $token, 'token_type' => 'Bearer', ]);
-        // }
-
     }
 
-
-    
 }
